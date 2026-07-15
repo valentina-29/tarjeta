@@ -1,0 +1,10 @@
+{
+  "name": "babyshower",
+  "private": true,
+  "scripts": {
+    "build:config": "node generate-config.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

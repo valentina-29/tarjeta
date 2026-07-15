@@ -1,0 +1,361 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f4e9dc;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Contenedor principal */
+.wrapper {
+    position: relative;
+    width: 380px;
+    height: 600px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* --- SOBRE AZUL --- */
+.envelope {
+    position: absolute;
+    top: 150px; 
+    width: 350px;
+    height: 250px;
+    background-color: #5d9cec; 
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.envelope::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: 
+        linear-gradient(35deg, rgba(0,0,0,0.06) 50%, transparent 50%),
+        linear-gradient(-35deg, rgba(0,0,0,0.06) 50%, transparent 50%);
+    pointer-events: none;
+}
+
+.envelope-heart {
+    width: 65px;
+    height: 65px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    font-size: 28px;
+    animation: pulse 2s infinite;
+    z-index: 11;
+}
+
+/* --- TARJETA DE INVITACIÓN --- */
+.card {
+    position: absolute;
+    top: 0;
+    width: 360px;
+    height: 510px;
+    background-image: url('tarjetaBaby.jpg'); /* Tu archivo local */
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+    
+    opacity: 0;
+    transform: scale(0.6) translateY(50px);
+    pointer-events: none;
+    z-index: 1;
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- BOTÓN CONFIRMAR ASISTENCIA (FUERA) --- */
+.btn-confirmar {
+    position: absolute;
+    top: 535px; 
+    background-color: #3b82f6;
+    color: #ffffff;
+    border: none;
+    padding: 14px 35px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+    transition: all 0.5s ease, opacity 0.8s ease;
+    
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+    z-index: 21;
+}
+
+.btn-confirmar:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(29, 78, 216, 0.4);
+}
+
+/* --- VENTANA FLOTANTE FORMULARIO --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 100;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 320px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transform: translateY(-30px);
+    transition: transform 0.4s ease;
+    text-align: center;
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0);
+}
+
+.modal h3 {
+    color: #1e3a5f;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.modal input, .modal select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: inherit;
+    outline: none;
+    font-size: 14px;
+    background-color: #f8fafc;
+}
+
+.modal input:focus {
+    border-color: #3b82f6;
+    background-color: #ffffff;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-submit {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    flex: 1;
+    font-size: 14px;
+}
+
+.btn-cancel {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    flex: 1;
+    font-size: 14px;
+}
+
+/* --- ALERTA DE ÉXITO ELEGANTE (PERSONALIZADA) --- */
+.success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(3px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 200;
+}
+
+.success-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.success-card {
+    background-color: #ffffff;
+    padding: 30px 25px;
+    border-radius: 20px;
+    width: 300px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transform: scale(0.8);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.success-overlay.active .success-card {
+    transform: scale(1);
+}
+
+.success-icon {
+    font-size: 40px;
+    color: #3b82f6;
+    margin-bottom: 15px;
+    animation: bounceIn 0.8s ease;
+}
+
+.success-card h4 {
+    color: #1e3a5f;
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.success-card p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.btn-success-close {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-success-close:hover {
+    background-color: #1d4ed8;
+    box-shadow: 0 6px 15px rgba(29, 78, 216, 0.3);
+}
+
+/* --- CLASES DE APERTURA --- */
+.envelope.opened {
+    opacity: 0;
+    transform: translateY(150px) scale(0.8);
+    pointer-events: none;
+}
+
+.card.opened {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+    z-index: 20;
+}
+
+.btn-confirmar.opened {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.1); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   EFECTO DE OSITOS Y NUBES VOLANDO
+   ========================================================================== */
+
+#bears-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Para que no bloquee los clics en la invitación */
+    z-index: 15; /* Por encima de la tarjeta pero por debajo de los modales */
+    overflow: hidden;
+}
+
+/* El elemento individual del osito en la nube */
+.floating-bear {
+    position: absolute;
+    bottom: -100px; /* Inician fuera de la pantalla abajo */
+    font-size: 45px; /* Tamaño del emoji (puedes usar imágenes si prefieres) */
+    white-space: nowrap;
+    opacity: 0;
+    animation: flyUp 8s linear infinite;
+}
+
+/* Animación para que suban flotando y balanceándose */
+@keyframes flyUp {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-110vh) translateX(100px) rotate(15deg);
+        opacity: 0;
+    }
+}

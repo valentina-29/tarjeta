@@ -1,0 +1,71 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Baby Shower - Mathias</title>
+    <!-- Montserrat para todo el diseño interactivo -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Enlace al archivo de estilos externos -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- REPRODUCTOR DE AUDIO OCULTO -->
+    <!-- Puedes usar esta melodía de cuna online o descargarla y poner tu propio archivo local 'cuna.mp3' -->
+   <audio id="musicaCuna" src="cuna.mp3" loop></audio>
+
+    <!-- Contenedor donde aparecerán los ositos voladores -->
+    <div id="bears-container"></div>
+
+    <div class="wrapper">
+        <!-- SOBRE -->
+        <div class="envelope" id="envelope" onclick="openInvitation()">
+            <div class="envelope-heart">💙</div>
+        </div>
+
+        <!-- TARJETA -->
+        <div class="card" id="card"></div>
+
+        <!-- BOTÓN CONFIRMAR -->
+        <button class="btn-confirmar" id="btnConfirmar" onclick="openModal()">Confirmar asistencia</button>
+    </div>
+
+    <!-- FORMULARIO MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h3>Confirmar Asistencia</h3>
+            <form id="rsvpForm" onsubmit="submitRSVP(event)">
+                <input type="text" id="nombre" placeholder="Tu Nombre Completo" required>
+                <select id="acompanantes" required>
+                    <option value="" disabled selected>¿Cuántos vendrán?</option>
+                    <option value="Solo yo">Solo yo</option>
+                    <option value="Yo + 1 acompañante">Yo + 1 acompañante</option>
+                    <option value="Yo + 2 acompañantes">Yo + 2 acompañantes</option>
+                    <option value="Yo + 3 acompañantes o más">Yo + 3 acompañantes o más</option>
+                </select>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn-submit" id="submitBtn">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ALERTA DE ÉXITO ELEGANTE Y PERSONALIZADA -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-card">
+            <div class="success-icon">👶🏼💙</div>
+            <h4>¡Asistencia Confirmada!</h4>
+            <p>Tu respuesta se ha guardado con éxito.<br>Gracias por acompañarnos en este día tan especial.</p>
+            <button class="btn-success-close" onclick="closeSuccessModal()">Aceptar</button>
+        </div>
+    </div>
+
+    <!-- Enlace al archivo de JavaScript externo -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
