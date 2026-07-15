@@ -2,7 +2,7 @@
 
 
 // Este texto será reemplazado automáticamente por GitHub en cada despliegue
-const SCRIPT_URL = "PROD_SCRIPT_URL_PLACEHOLDER";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxB0Cn6ZJiMwX4RftQ8RXoBhFUiGcrN1dZmYw9UvwfXkBLLLSobbJ2oI4ykkHJoDHy1Nw/exec";
 
 function openInvitation() {
     document.getElementById('envelope').classList.add('opened');
