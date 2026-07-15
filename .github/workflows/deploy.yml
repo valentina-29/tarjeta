@@ -6,9 +6,9 @@ on:
       - main
 
 permissions:
-  contents: write
-  pages: write      # Recomendado para despliegues a Pages
-  id-token: write   # Recomendado para despliegues a Pages
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # REEMPLAZA EL TEXTO "PROD_SCRIPT_URL_PLACEHOLDER" EN TU SCRIPT.JS
+      # REEMPLAZO DIRECTO: Busca el marcador en script.js y le inyecta el Secreto de GitHub
       - name: Inyectar URL de Apps Script
         env:
           SCRIPT_URL: ${{ secrets.SCRIPT_URL }}
