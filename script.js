@@ -1,7 +1,8 @@
 
 
 
-const SCRIPT_URL = window.__APP_CONFIG__?.SCRIPT_URL || "";
+// Este texto será reemplazado automáticamente por GitHub en cada despliegue
+const SCRIPT_URL = "PROD_SCRIPT_URL_PLACEHOLDER";
 
 function openInvitation() {
     document.getElementById('envelope').classList.add('opened');
